@@ -1,0 +1,1 @@
+enum ForeignLang { en, ru }

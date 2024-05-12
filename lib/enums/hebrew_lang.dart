@@ -1,0 +1,1 @@
+enum HebrewLang { simple, nikkud }
