@@ -1,3 +1,4 @@
+import 'package:ani_lo_medaber_ivrit/db/common_dao.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,11 +14,13 @@ class StemsScreen extends ConsumerStatefulWidget {
 class _StemsScreenState extends ConsumerState<StemsScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-            child: Text(
-      "{stems content}",
-      style: TextStyle(color: Colors.white),
-    )));
+    return Scaffold(
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () => CommonDAO.printAll(),
+          child: const Text("click"),
+        ),
+      ),
+    );
   }
 }

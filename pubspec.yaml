@@ -37,10 +37,13 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_riverpod: ^2.5.1
   google_fonts: 6.1.0
+  sqflite: ^2.3.2
+  path: ^1.8.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  change_app_package_name: ^1.1.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

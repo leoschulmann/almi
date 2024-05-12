@@ -2,6 +2,9 @@ import 'package:ani_lo_medaber_ivrit/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sqflite_common/sqlite_api.dart';
+
+import 'db/db.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -12,7 +15,9 @@ final theme = ThemeData(
   textTheme: GoogleFonts.latoTextTheme(),
 );
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await getConnection();
   runApp(const ProviderScope(child: MyApp()));
 }
 
