@@ -1,0 +1,13 @@
+/.dart_tool
+/.idea
+/android
+/ios
+/linux
+/macos
+/test
+/web
+/windows
+.metadata
+*.iml
+analysis_options.yaml
+*.lock
