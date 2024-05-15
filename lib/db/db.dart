@@ -7,14 +7,17 @@ Future<Database>? _database;
 
 Future<Database> getConnection() async {
   _database ??= openDatabase(
-      join(await getDatabasesPath(), 'almi.db'),
-      version: 1,
-      onConfigure: dropAllTables,
-      onCreate: initMigration,
-    );
+    join(await getDatabasesPath(), 'almi.db'),
+    version: 1,
+    onConfigure: (db) {
+      // dropAllTables(db);
+      initMigration(db, 1);
+    },
+  );
   return _database!;
 }
 
+/*
 FutureOr<void> dropAllTables(Database db) async {
   await db.execute('''
     drop table if exists android_metadata;
@@ -27,3 +30,4 @@ FutureOr<void> dropAllTables(Database db) async {
     drop table if exists transliteration_ru;
   ''');
 }
+*/

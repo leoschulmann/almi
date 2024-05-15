@@ -17,7 +17,7 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
     return Scaffold(
       body: Center(
         child: ElevatedButton(
-          onPressed: () => CommonDAO.printAll(),
+          onPressed: () => CommonDAO.getAllStems(),
           child: const Text("click"),
         ),
       ),
