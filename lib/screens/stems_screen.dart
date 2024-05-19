@@ -18,10 +18,7 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
   List<Stem> currentStems = [];
 
   Future<void> fetchData() async {
-    var stems = await CommonDAO.getStems(50, 0);
-    for (Stem stem in stems) {
-      print(stem.valueHebrew[HebrewLang.simple]);
-    }
+    List<Stem> stems = await CommonDAO.getStems(50, 0);
     setState(() => currentStems = stems);
   }
 
@@ -50,16 +47,11 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
             onPressed: fetchData, child: const Text("Load stems from DB")),
       );
     } else {
-      return ListView.separated(
+      return ListView.builder(
         itemCount: currentStems.length,
         itemBuilder: (context, index) {
           return StemContainer(stem: currentStems[index]);
-          // return Text(
-          //   currentStems[index].valueHebrew[HebrewLang.simple]!,
-          //   style: const TextStyle(color: Colors.white),
-          // );
         },
-        separatorBuilder: (context, index) => const Divider(),
       );
     }
   }

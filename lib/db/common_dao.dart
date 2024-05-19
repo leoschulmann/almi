@@ -1,7 +1,6 @@
 import 'package:ani_lo_medaber_ivrit/db/db.dart';
 import 'package:ani_lo_medaber_ivrit/enums/foreign_lang.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
-import 'package:ani_lo_medaber_ivrit/models/binyan.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:collection/collection.dart';
 import 'package:sqflite_common/sqlite_api.dart';
@@ -20,7 +19,7 @@ class CommonDAO {
 
     List<Map<String, Object?>> resultsetStem = await database.query(
       'stem',
-      columns: ['id', 'hebrew', 'binyan'],
+      columns: ['id', 'hebrew'],
       limit: limit,
       offset: offset,
       orderBy: 'hebrew',
@@ -56,7 +55,6 @@ class CommonDAO {
         ForeignLang.en: ['n/a'],
         ForeignLang.ru: ['n/a']
       },
-      binyan: Binyan.get(tuple['binyan'] as String),
     );
   }
 

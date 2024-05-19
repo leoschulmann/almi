@@ -16,8 +16,7 @@ FutureOr<void> initMigration(Database db, int version) async {
     create table stem(
     id     integer      not null constraint stem_pk primary key autoincrement,
     hebrew TEXT         not null,
-    nikkud TEXT not null, 
-    binyan TEXT not null
+    nikkud TEXT not null
     );
     ''');
 
@@ -41,10 +40,10 @@ FutureOr<void> initMigration(Database db, int version) async {
 
   Batch batch = db.batch();
   batch.rawInsert('''
-  insert into stem (hebrew, nikkud, binyan) values 
-  ('אכל','אכל' , 'paal'),
-  ('כתב','כתב', 'paal'),
-  ('עבד','עבד', 'paal');
+  insert into stem (hebrew, nikkud) values 
+  ('אכל','אכל'),
+  ('כתב','כתב'),
+  ('עבד','עבד');
   ''');
 
   batch.rawInsert('''

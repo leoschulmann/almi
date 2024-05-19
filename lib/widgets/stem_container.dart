@@ -22,11 +22,6 @@ class StemContainer extends StatelessWidget {
       height: 50,
       child: Row(
         children: [
-          Container(
-            width: 50,
-            alignment: Alignment.center,
-            child: Icon(stem.binyan.icon, color: stem.binyan.color),
-          ),
           Expanded(
             child: Container(
               alignment: Alignment.center,
