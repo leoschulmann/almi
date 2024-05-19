@@ -1,6 +1,7 @@
 import 'package:ani_lo_medaber_ivrit/db/db.dart';
 import 'package:ani_lo_medaber_ivrit/enums/foreign_lang.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
+import 'package:ani_lo_medaber_ivrit/models/binyan.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:collection/collection.dart';
 import 'package:sqflite_common/sqlite_api.dart';
@@ -14,11 +15,16 @@ class CommonDAO {
     }
   }
 
-  static Future<void> getAllStems() async {
+  static Future<List<Stem>> getStems(int limit, int offset) async {
     Database database = await getConnection();
 
-    List<Map<String, Object?>> resultsetStem = await database.query('stem',
-        columns: ['id', 'hebrew'], limit: 50, orderBy: 'hebrew');
+    List<Map<String, Object?>> resultsetStem = await database.query(
+      'stem',
+      columns: ['id', 'hebrew', 'binyan'],
+      limit: limit,
+      offset: offset,
+      orderBy: 'hebrew',
+    );
 
     List<int> ids = [];
 
@@ -104,22 +110,24 @@ class CommonDAO {
       }));
     });
 
-    List<Stem> list = resultsetStem.map((Map<String, Object?> row) {
+    var list = resultsetStem.map((Map<String, Object?> row) {
       int id = row['id'] as int;
       String spelling = row['hebrew'] as String;
       return Stem(
-          id: id,
-          valueHebrew: {HebrewLang.simple: spelling},
-          transliteration: transliterations[id] ??= {
-            ForeignLang.en: 'n/a',
-            ForeignLang.ru: 'n/a'
-            //todo propagate other langs
-          },
-          meanings: meanings2[id] ??= {
-            ForeignLang.en: ['n/a'],
-            ForeignLang.ru: ['n/a']
-          });
+        id: id,
+        valueHebrew: {HebrewLang.simple: spelling},
+        transliteration: transliterations[id] ??= {
+          ForeignLang.en: 'n/a',
+          ForeignLang.ru: 'n/a'
+          //todo propagate other langs
+        },
+        meanings: meanings2[id] ??= {
+          ForeignLang.en: ['n/a'],
+          ForeignLang.ru: ['n/a']
+        },
+        binyan: Binyan.get(row['binyan'] as String),
+      );
     }).toList();
-
+    return list;
   }
 }

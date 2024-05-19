@@ -39,6 +39,7 @@ dependencies:
   google_fonts: 6.1.0
   sqflite: ^2.3.2
   path: ^1.8.3
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -93,3 +94,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: Gveret
+      fonts:
+        - asset: fonts/GveretLevinAlefAlefAlef-Regular.otf

@@ -17,7 +17,7 @@ class Binyan {
   final Map<HebrewLang, String> names;
   final Map<ForeignLang, String> transliterations;
   final Color color;
-  final Icon icon;
+  final IconData icon;
 
   static const Binyan paal = Binyan._(
     names: {
@@ -29,7 +29,7 @@ class Binyan {
       ForeignLang.ru: 'Пааль',
     },
     color: Colors.red,
-    icon: Icon(Icons.music_note),
+    icon: Icons.music_note,
   );
 
   static const Binyan piel = Binyan._(
@@ -42,7 +42,7 @@ class Binyan {
       ForeignLang.ru: 'Пиэль',
     },
     color: Colors.blue,
-    icon: Icon(Icons.lightbulb),
+    icon: Icons.lightbulb,
   );
 
   static const Binyan hifil = Binyan._(
@@ -55,7 +55,7 @@ class Binyan {
       ForeignLang.ru: 'Хифиль',
     },
     color: Colors.deepPurple,
-    icon: Icon(Icons.airplanemode_active),
+    icon: Icons.airplanemode_active,
   );
 
   static const Binyan hitpael = Binyan._(
@@ -68,7 +68,7 @@ class Binyan {
       ForeignLang.ru: 'Хитпаэль',
     },
     color: Colors.teal,
-    icon: Icon(Icons.sunny),
+    icon: Icons.sunny,
   );
 
   static const Binyan nifal = Binyan._(
@@ -81,7 +81,7 @@ class Binyan {
       ForeignLang.ru: 'Нифаль',
     },
     color: Colors.orange,
-    icon: Icon(Icons.pets),
+    icon: Icons.pets,
   );
 
   static const Binyan pual = Binyan._(
@@ -94,7 +94,7 @@ class Binyan {
       ForeignLang.ru: 'Пуаль',
     },
     color: Colors.lime,
-    icon: Icon(Icons.key),
+    icon: Icons.key,
   );
 
   static const Binyan hufal = Binyan._(
@@ -107,8 +107,23 @@ class Binyan {
       ForeignLang.ru: 'Хуфаль',
     },
     color: Colors.green,
-    icon: Icon(Icons.rocket_launch),
+    icon: Icons.rocket_launch,
   );
+
+  static Binyan get(String s) {
+    BinyanType? type;
+
+    for (BinyanType value in BinyanType.values) {
+      if (value.name == s) {
+        type = value;
+        break;
+      }
+      throw Exception("cant find binyan for $s");
+    }
+
+    Binyan binyan = binyans[type]!;
+    return binyan;
+  }
 
   const Binyan._({
     required this.names,
