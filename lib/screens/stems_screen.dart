@@ -43,8 +43,7 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
   Widget drawBody() {
     if (currentStems.isEmpty) {
       return Center(
-        child: ElevatedButton(
-            onPressed: fetchData, child: const Text("Load stems from DB")),
+        child: ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB")),
       );
     } else {
       return ListView.builder(

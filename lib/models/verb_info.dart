@@ -16,15 +16,11 @@ class VerbInfo {
             "invalid verb parameters");
 }
 
-bool _validPresent(
-    Plurality plurality, GrammaticalPerson person, VerbForm form) {
-  return form == VerbForm.present &&
-      person == GrammaticalPerson.none &&
-      _extendedPlurality.contains(plurality);
+bool _validPresent(Plurality plurality, GrammaticalPerson person, VerbForm form) {
+  return form == VerbForm.present && person == GrammaticalPerson.none && _extendedPlurality.contains(plurality);
 }
 
-bool _validFutureOrPast(
-    Plurality plurality, GrammaticalPerson person, VerbForm form) {
+bool _validFutureOrPast(Plurality plurality, GrammaticalPerson person, VerbForm form) {
   if (form != VerbForm.future && form != VerbForm.past) {
     return false;
   }
@@ -39,17 +35,12 @@ bool _validFutureOrPast(
   }
 }
 
-bool _validImperative(
-    Plurality plurality, GrammaticalPerson person, VerbForm form) {
-  return form == VerbForm.imperative &&
-      person == GrammaticalPerson.none &&
-      _extendedPlurality.contains(plurality);
+bool _validImperative(Plurality plurality, GrammaticalPerson person, VerbForm form) {
+  return form == VerbForm.imperative && person == GrammaticalPerson.none && _extendedPlurality.contains(plurality);
 }
-bool _validInfinitive(
-    Plurality plurality, GrammaticalPerson person, VerbForm form) {
-  return form == VerbForm.infinitive &&
-      plurality == Plurality.none &&
-      person == GrammaticalPerson.none;
+
+bool _validInfinitive(Plurality plurality, GrammaticalPerson person, VerbForm form) {
+  return form == VerbForm.infinitive && plurality == Plurality.none && person == GrammaticalPerson.none;
 }
 
 const List<Plurality> _simplePlurality = [Plurality.singular, Plurality.plural];

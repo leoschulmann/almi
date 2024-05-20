@@ -1,9 +1,8 @@
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/styles/text_styles.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 
 class StemContainer extends StatelessWidget {
   const StemContainer({super.key, required this.stem});
@@ -15,9 +14,7 @@ class StemContainer extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-            colors: [Colors.white60, Colors.white38],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter),
+            colors: [Colors.white60, Colors.white38], begin: Alignment.topCenter, end: Alignment.bottomCenter),
       ),
       height: 50,
       child: Row(

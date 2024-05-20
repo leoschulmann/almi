@@ -27,20 +27,14 @@ class CommonDAO {
 
     List<int> ids = resultsetStem.map((tuple) => tuple['id'] as int).toList();
 
-    Map<int, Map<ForeignLang, String>> transliterations =
-        await _getTransliterationsForWordIdIn(ids);
+    Map<int, Map<ForeignLang, String>> transliterations = await _getTransliterationsForWordIdIn(ids);
 
-    Map<int, Map<ForeignLang, List<String>>> meanings =
-        await _getMeaningsForWordIdIn(ids);
+    Map<int, Map<ForeignLang, List<String>>> meanings = await _getMeaningsForWordIdIn(ids);
 
-    return resultsetStem
-        .map((tuple) => _mapTupleToStem(tuple, transliterations, meanings))
-        .toList();
+    return resultsetStem.map((tuple) => _mapTupleToStem(tuple, transliterations, meanings)).toList();
   }
 
-  static Stem _mapTupleToStem(
-      Map<String, Object?> tuple,
-      Map<int, Map<ForeignLang, String>> transliterations,
+  static Stem _mapTupleToStem(Map<String, Object?> tuple, Map<int, Map<ForeignLang, String>> transliterations,
       Map<int, Map<ForeignLang, List<String>>> meanings) {
     int id = tuple['id'] as int;
     return Stem(
@@ -58,8 +52,7 @@ class CommonDAO {
     );
   }
 
-  static Future<Map<int, Map<ForeignLang, List<String>>>>
-      _getMeaningsForWordIdIn(List<int> ids) async {
+  static Future<Map<int, Map<ForeignLang, List<String>>>> _getMeaningsForWordIdIn(List<int> ids) async {
     Database database = await getConnection();
 
     Map<int, Map<ForeignLang, List<String>>> meanings = await database
@@ -69,8 +62,7 @@ class CommonDAO {
       where: 'word_id IN (${ids.join(', ')})',
     )
         .then((List<Map<String, Object?>> rows) {
-      Map<Object?, List<Map<String, Object?>>> grouped =
-          groupBy(rows, (row) => row['word_id']);
+      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['word_id']);
 
       return Map<int, Map<ForeignLang, List<String>>>.fromEntries(
         grouped.entries.map(
@@ -78,19 +70,14 @@ class CommonDAO {
             int wordId = e.key as int;
             List<Map<String, Object?>> value = e.value;
 
-            Map<Object?, List<Map<String, Object?>>> groupedByLang =
-                groupBy(value, (row) => row['lang']);
+            Map<Object?, List<Map<String, Object?>>> groupedByLang = groupBy(value, (row) => row['lang']);
 
-            Map<ForeignLang, List<String>> map =
-                Map<ForeignLang, List<String>>.fromEntries(
+            Map<ForeignLang, List<String>> map = Map<ForeignLang, List<String>>.fromEntries(
               groupedByLang.entries.map(
                 (MapEntry<Object?, List<Map<String, Object?>>> pair) {
                   ForeignLang lang = parseForeignLang(pair.key as String);
-                  List<String> meanings = pair.value
-                      .map((e) => e['value'] as String)
-                      .toList();
-                  return MapEntry<ForeignLang, List<String>>(
-                      lang, meanings);
+                  List<String> meanings = pair.value.map((e) => e['value'] as String).toList();
+                  return MapEntry<ForeignLang, List<String>>(lang, meanings);
                 },
               ),
             );
@@ -103,8 +90,7 @@ class CommonDAO {
     return meanings;
   }
 
-  static Future<Map<int, Map<ForeignLang, String>>>
-      _getTransliterationsForWordIdIn(List<int> ids) async {
+  static Future<Map<int, Map<ForeignLang, String>>> _getTransliterationsForWordIdIn(List<int> ids) async {
     Database database = await getConnection();
 
     Map<int, Map<ForeignLang, String>> transliterations = await database
@@ -114,14 +100,12 @@ class CommonDAO {
       where: 'word_id IN (${ids.join(', ')})',
     )
         .then((List<Map<String, Object?>> rows) {
-      Map<Object?, List<Map<String, Object?>>> grouped =
-          groupBy(rows, (row) => row['word_id']);
+      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['word_id']);
 
       return Map<int, Map<ForeignLang, String>>.fromEntries(
         grouped.entries.map(
           (MapEntry<Object?, List<Map<String, Object?>>> tuple) {
-            Map<ForeignLang, String> map =
-                Map<ForeignLang, String>.fromEntries(
+            Map<ForeignLang, String> map = Map<ForeignLang, String>.fromEntries(
               tuple.value.map(
                 (Map<String, Object?> m) {
                   ForeignLang lang = parseForeignLang(m['lang'] as String);
