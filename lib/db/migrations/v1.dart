@@ -1,52 +1,49 @@
-import 'dart:async';
+const List<String> dropQueries = [
+  'drop table if exists android_metadata;',
+  'drop table if exists meaning_en;',
+  'drop table if exists meaning_ru;',
+  'drop table if exists stem;',
+  'drop table if exists transliteration_en;',
+  'drop table if exists transliteration_ru;',
+  'drop table if exists meaning;',
+  'drop table if exists transliteration;',
+];
 
-import 'package:sqflite/sqflite.dart';
-
-FutureOr<void> initMigration(Database db, int version) async {
-  await db.execute('drop table if exists android_metadata;');
-  await db.execute('drop table if exists meaning_en;');
-  await db.execute('drop table if exists meaning_ru;');
-  await db.execute('drop table if exists stem;');
-  await db.execute('drop table if exists transliteration_en;');
-  await db.execute('drop table if exists transliteration_ru;');
-  await db.execute('drop table if exists meaning;');
-  await db.execute('drop table if exists transliteration;');
-
-  await db.execute('''
+const String createStemTable = '''
     create table stem(
     id     integer      not null constraint stem_pk primary key autoincrement,
     hebrew TEXT         not null,
     nikkud TEXT not null
     );
-    ''');
+    ''';
 
-  await db.execute('''
+const String createTransliterationTable = '''
     create table transliteration(
     id      integer not null constraint transliteration_en_pk primary key autoincrement,
     word_id integer not null,
     value   TEXT    not null,
     lang    TEXT    not null
     );
-    ''');
+    ''';
 
-  await db.execute('''
+const String createMeaningTable = '''
     create table meaning(
     id      integer not null constraint meaning_ru_pk primary key autoincrement,
     word_id integer not null,
     value   text    not null,
     lang    TEXT    not null
     );
-    ''');
+    ''';
 
-  Batch batch = db.batch();
-  batch.rawInsert('''
+const List<String> populateDataQueries = [
+  '''
   insert into stem (hebrew, nikkud) values 
+  ('שתה','שתה'),
   ('אכל','אכל'),
   ('כתב','כתב'),
   ('עבד','עבד');
-  ''');
-
-  batch.rawInsert('''
+  ''',
+  '''
 insert into meaning (word_id, value, lang) values 
 ((select id from stem where hebrew = 'עבד'), 'work', 'en'),
 ((select id from stem where hebrew = 'עבד'), 'работать', 'ru'),
@@ -55,14 +52,10 @@ insert into meaning (word_id, value, lang) values
 ((select id from stem where hebrew = 'אכל'), 'есть', 'ru'),
 ((select id from stem where hebrew = 'אכל'), 'eat', 'en'),
 ((select id from stem where hebrew = 'אכל'), 'consume', 'en');
-''');
-
-  batch.rawInsert('''
+''',
+  '''
   insert into transliteration (word_id, value, lang) values 
 ((select id from stem where hebrew = 'כתב'), 'katav', 'en'),
 ((select id from stem where hebrew = 'עבד'), 'avad', 'en');
-  ''');
-
-  await batch.commit();
-  print('finished migration');
-}
+  ''',
+];

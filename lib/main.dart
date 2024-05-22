@@ -1,9 +1,8 @@
+import 'package:ani_lo_medaber_ivrit/db/db.dart';
 import 'package:ani_lo_medaber_ivrit/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'db/db.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -16,7 +15,7 @@ final theme = ThemeData(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await getConnection();
+  initDb();
   runApp(const ProviderScope(child: MyApp()));
 }
 

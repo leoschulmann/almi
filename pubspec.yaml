@@ -38,8 +38,10 @@ dependencies:
   flutter_riverpod: ^2.5.1
   google_fonts: 6.1.0
   sqflite: ^2.3.2
+  sqflite_common: ^2.5.3
   path: ^1.8.3
   auto_size_text: ^3.0.0
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

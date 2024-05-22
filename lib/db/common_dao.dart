@@ -3,21 +3,10 @@ import 'package:ani_lo_medaber_ivrit/enums/foreign_lang.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:collection/collection.dart';
-import 'package:sqflite_common/sqlite_api.dart';
 
 class CommonDAO {
-  static Future<void> printAll() async {
-    Database database = await getConnection();
-    List<Map<String, dynamic>> query = await database.query('stem');
-    for (var value in query) {
-      print(value);
-    }
-  }
-
   static Future<List<Stem>> getStems(int limit, int offset) async {
-    Database database = await getConnection();
-
-    List<Map<String, Object?>> resultsetStem = await database.query(
+    List<Map<String, Object?>> resultSetStem = await sqlite.query(
       'stem',
       columns: ['id', 'hebrew'],
       limit: limit,
@@ -25,13 +14,13 @@ class CommonDAO {
       orderBy: 'hebrew',
     );
 
-    List<int> ids = resultsetStem.map((tuple) => tuple['id'] as int).toList();
+    List<int> ids = resultSetStem.map((tuple) => tuple['id'] as int).toList();
 
     Map<int, Map<ForeignLang, String>> transliterations = await _getTransliterationsForWordIdIn(ids);
 
     Map<int, Map<ForeignLang, List<String>>> meanings = await _getMeaningsForWordIdIn(ids);
 
-    return resultsetStem.map((tuple) => _mapTupleToStem(tuple, transliterations, meanings)).toList();
+    return resultSetStem.map((tuple) => _mapTupleToStem(tuple, transliterations, meanings)).toList();
   }
 
   static Stem _mapTupleToStem(Map<String, Object?> tuple, Map<int, Map<ForeignLang, String>> transliterations,
@@ -53,9 +42,7 @@ class CommonDAO {
   }
 
   static Future<Map<int, Map<ForeignLang, List<String>>>> _getMeaningsForWordIdIn(List<int> ids) async {
-    Database database = await getConnection();
-
-    Map<int, Map<ForeignLang, List<String>>> meanings = await database
+    Map<int, Map<ForeignLang, List<String>>> meanings = await sqlite
         .query(
       'meaning',
       columns: ['word_id', 'value', 'lang'],
@@ -91,9 +78,7 @@ class CommonDAO {
   }
 
   static Future<Map<int, Map<ForeignLang, String>>> _getTransliterationsForWordIdIn(List<int> ids) async {
-    Database database = await getConnection();
-
-    Map<int, Map<ForeignLang, String>> transliterations = await database
+    Map<int, Map<ForeignLang, String>> transliterations = await sqlite
         .query(
       'transliteration',
       columns: ['word_id', 'value', 'lang'],
