@@ -1,4 +1,4 @@
-import 'package:ani_lo_medaber_ivrit/db/common_dao.dart';
+import 'package:ani_lo_medaber_ivrit/db/stem_dao.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/widgets/stem_container.dart';
@@ -18,7 +18,7 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
   List<Stem> currentStems = [];
 
   Future<void> fetchData() async {
-    List<Stem> stems = await CommonDAO.getStems(50, 0);
+    List<Stem> stems = await StemDAO.getStems(50, 0);
     setState(() => currentStems = stems);
   }
 
@@ -43,7 +43,11 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
   Widget drawBody() {
     if (currentStems.isEmpty) {
       return Center(
-        child: ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB")),
+        child: Column(
+          children: [
+            ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB")),
+          ],
+        ),
       );
     } else {
       return ListView.builder(

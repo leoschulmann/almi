@@ -118,6 +118,9 @@ class Binyan {
         type = value;
         break;
       }
+    }
+
+    if (type == null) {
       throw Exception("cant find binyan for $s");
     }
 

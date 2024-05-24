@@ -40,6 +40,9 @@ _createDbCallback(Database db) {
   db.execute(createStemTable);
   db.execute(createTransliterationTable);
   db.execute(createMeaningTable);
+  db.execute(createVerbTable);
+  db.execute(createSampleSentenceTable);
+  db.execute(createSampleTranslationsTable);
 
   var batch = db.batch();
   for (var query in populateDataQueries) {

@@ -4,7 +4,7 @@ import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:collection/collection.dart';
 
-class CommonDAO {
+class StemDAO {
   static Future<List<Stem>> getStems(int limit, int offset) async {
     List<Map<String, Object?>> resultSetStem = await sqlite.query(
       'stem',
@@ -44,7 +44,7 @@ class CommonDAO {
   static Future<Map<int, Map<ForeignLang, List<String>>>> _getMeaningsForWordIdIn(List<int> ids) async {
     Map<int, Map<ForeignLang, List<String>>> meanings = await sqlite
         .query(
-      'meaning',
+      'word_meaning',
       columns: ['word_id', 'value', 'lang'],
       where: 'word_id IN (${ids.join(', ')})',
     )
