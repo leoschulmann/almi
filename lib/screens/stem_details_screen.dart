@@ -1,12 +1,14 @@
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
+import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/models/verb.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StemDetailsScreen extends ConsumerStatefulWidget {
-  const StemDetailsScreen({super.key, required this.verbs});
+  const StemDetailsScreen({super.key, required this.verbs, required this.stem});
 
   final List<Verb> verbs;
+  final Stem stem;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
@@ -18,6 +20,9 @@ class _StemDetailsScreenState extends ConsumerState<StemDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('${widget.stem.valueHebrew[HebrewLang.simple]}'),
+      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
