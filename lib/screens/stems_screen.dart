@@ -1,5 +1,4 @@
 import 'package:ani_lo_medaber_ivrit/db/stem_dao.dart';
-import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/widgets/stem_container.dart';
 import 'package:flutter/material.dart';
@@ -22,32 +21,13 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
     setState(() => currentStems = stems);
   }
 
-  Widget getBody() {
-    if (currentStems.isEmpty) {
-      return const Center(
-        child: Text('no data'),
-      );
-    } else {
-      return ListView.builder(
-        itemCount: currentStems.length,
-        itemBuilder: (context, index) {
-          return Text(
-            currentStems[index].valueHebrew[HebrewLang.simple]!,
-            style: const TextStyle(color: Colors.white),
-          );
-        },
-      );
-    }
-  }
-
   Widget drawBody() {
     if (currentStems.isEmpty) {
-      return Center(
-        child: Column(
-          children: [
-            ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB")),
-          ],
-        ),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(child: ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB"))),
+        ],
       );
     } else {
       return ListView.builder(
@@ -62,6 +42,7 @@ class _StemsScreenState extends ConsumerState<StemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Stems (${currentStems.length})")),
       body: drawBody(),
     );
   }
