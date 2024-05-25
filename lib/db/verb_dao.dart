@@ -10,7 +10,7 @@ import 'package:ani_lo_medaber_ivrit/models/verb.dart';
 import 'package:ani_lo_medaber_ivrit/models/verb_info.dart';
 
 class VerbDAO {
-  static Future<List<Verb>> getVerbForStem(Stem stem, {VerbInfo verbInfo = VerbInfo.verbInfinitive}) async {
+  static Future<List<Verb>> getVerbsForStem(Stem stem, {VerbInfo verbInfo = VerbInfo.verbInfinitive}) async {
     List<Map<String, Object?>> resultSet = await sqlite.query('verb',
         columns: [
           'id',

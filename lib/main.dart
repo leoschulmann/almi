@@ -1,20 +1,13 @@
 import 'package:ani_lo_medaber_ivrit/db/db.dart';
 import 'package:ani_lo_medaber_ivrit/screens/tabs_screen.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-final theme = ThemeData(
-  useMaterial3: true,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: Colors.lightBlue,
-    brightness: Brightness.dark,
-  ),
-  textTheme: GoogleFonts.latoTextTheme(),
-);
+import 'package:sqflite/sqflite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Sqflite.setDebugModeOn(true);
   initDb();
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -25,7 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: theme,
+
+      theme: FlexThemeData.light(scheme: FlexScheme.flutterDash),
+      darkTheme: FlexThemeData.dark(scheme: FlexScheme.flutterDash),
+      themeMode: ThemeMode.system,
       home: const TabsScreen(),
     );
   }
