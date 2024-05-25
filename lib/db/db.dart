@@ -9,7 +9,7 @@ const String _dbName = 'almi.db';
 Database? _db;
 
 Database get sqlite {
-  if(_db == null) {
+  if (_db == null) {
     throw Exception("db not initialized");
   }
   return _db!;
@@ -33,7 +33,8 @@ Future<void> initDb() async {
 _configureCallback(Database db) {}
 
 _createDbCallback(Database db) {
-  for (var dropQuery in dropQueries) { //todo testing only
+  for (var dropQuery in dropQueries) {
+    //todo testing only
     db.execute(dropQuery);
   }
 

@@ -20,7 +20,7 @@ class StemContainer extends ConsumerWidget {
     TextTheme theme = Theme.of(context).textTheme;
 
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(2.0),
       child: InkWell(
         onTap: () async {
           VerbDAO.getVerbsForStem(stem).then(
@@ -28,6 +28,8 @@ class StemContainer extends ConsumerWidget {
           );
         },
         child: Card(
+          borderOnForeground: true,
+          elevation: 5,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -38,7 +40,7 @@ class StemContainer extends ConsumerWidget {
                 child: AutoSizeText(
                   stem.valueHebrew[HebrewLang.simple] ?? 'err',
                   maxLines: 1,
-                  style: StyleHelper.getHebrewNoto(theme),
+                  style: StyleHelper.getHebrewNotoAutoSize(theme),
                 ),
               ),
               const SizedBox(width: 12),

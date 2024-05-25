@@ -1,6 +1,8 @@
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/models/verb.dart';
+import 'package:ani_lo_medaber_ivrit/styles/style_helper.dart';
+import 'package:ani_lo_medaber_ivrit/widgets/stem_details_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,6 +21,8 @@ class StemDetailsScreen extends ConsumerStatefulWidget {
 class _StemDetailsScreenState extends ConsumerState<StemDetailsScreen> {
   @override
   Widget build(BuildContext context) {
+    TextTheme theme = Theme.of(context).textTheme;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.stem.valueHebrew[HebrewLang.simple]}'),
@@ -27,24 +31,14 @@ class _StemDetailsScreenState extends ConsumerState<StemDetailsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Verbs:',
-              style: TextStyle(color: Colors.white),
-            ),
-            ...widget.verbs.map((v) => Text(
-                  v.valueHebrew[HebrewLang.simple]!,
-                  style: const TextStyle(color: Colors.red),
-                )),
+            Text('Verbs', style: StyleHelper.getItalicLatin(theme.headlineLarge!)),
+            ...widget.verbs.map((v) => StemDetailsContainer(verb: v)),
             const SizedBox(height: 12),
-            const Text(
-              'Nouns',
-              style: TextStyle(color: Colors.white),
-            ),
+            const Divider(height: 10),
+            Text('Nouns', style: StyleHelper.getItalicLatin(theme.headlineLarge!)),
             const SizedBox(height: 12),
-            const Text(
-              'Adjectives',
-              style: TextStyle(color: Colors.white),
-            ),
+            const Divider(height: 10),
+            Text('Adjectives', style: StyleHelper.getItalicLatin(theme.headlineLarge!)),
           ],
         ),
       ),

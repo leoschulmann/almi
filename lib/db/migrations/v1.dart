@@ -1,15 +1,21 @@
 const List<String> dropQueries = [
   'drop table if exists android_metadata;',
-  'drop table if exists meaning_en;',
-  'drop table if exists meaning_ru;',
-  'drop table if exists stem;',
-  'drop table if exists transliteration_en;',
-  'drop table if exists transliteration_ru;',
-  'drop table if exists word_meaning;',
-  'drop table if exists verb;',
   'drop table if exists sample;',
   'drop table if exists sample_meaning;',
+  'drop table if exists stem;',
   'drop table if exists transliteration;',
+  'drop table if exists verb;',
+  'drop table if exists word_meaning;',
+  // 'drop table if exists meaning_en;',
+  // 'drop table if exists meaning_ru;',
+  // 'drop table if exists stem;',
+  // 'drop table if exists transliteration_en;',
+  // 'drop table if exists transliteration_ru;',
+  // 'drop table if exists word_meaning;',
+  // 'drop table if exists verb;',
+  // 'drop table if exists sample;',
+  // 'drop table if exists sample_meaning;',
+  // 'drop table if exists transliteration;',
 ];
 
 const String createStemTable = '''
@@ -62,7 +68,6 @@ create table sample_meaning(
     value     TEXT    not null,
     lang      TEXT    not null);
 ''';
-
 
 const List<String> populateDataQueries = [
   '''
@@ -121,7 +126,7 @@ insert into word_meaning (word_id, value, lang) values
 ((select id from stem where hebrew = 'עבד'), 'work', 'en'),
 ((select id from stem where hebrew = 'עבד'), 'работать', 'ru');
 ''',
-'''
+  '''
 insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) values 
 ((select id from stem where hebrew = 'כתב'), 'לכתוב', 'לִכְתוֹב', 'paal', 'none', 'none', 'infinitive'),
 ((select id from stem where hebrew = 'אכל'), 'לאכול', 'לֶאֱכוֹל', 'paal', 'none', 'none', 'infinitive'),
@@ -137,7 +142,7 @@ insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) valu
 ((select id from stem where hebrew = 'עבד'), 'לעבוד', 'לַעֲבוֹד', 'paal', 'none', 'none', 'infinitive'),
 ((select id from stem where hebrew = 'עבד'), 'לעבד', 'לְעַבֵּד', 'piel', 'none', 'none', 'infinitive');
 ''',
-'''
+  '''
 insert into word_meaning (word_id, value, lang) values
 ((select id from verb where hebrew = 'לכתוב'), 'писать', 'ru'),
 ((select id from verb where hebrew = 'לאכול'), 'есть', 'ru'),
@@ -152,7 +157,8 @@ insert into word_meaning (word_id, value, lang) values
 ((select id from verb where hebrew = 'לשתות'), 'пить', 'ru'),
 ((select id from verb where hebrew = 'לעבוד'), 'работать', 'ru'),
 ((select id from verb where hebrew = 'לעבד'), 'обрабатывать', 'ru');
-
+''',
+'''
 insert into word_meaning (word_id, value, lang) values
 ((select id from verb where hebrew = 'לכתוב'), 'to write', 'en'),
 ((select id from verb where hebrew = 'לאכול'), 'to eat', 'en'),
@@ -185,21 +191,19 @@ insert into transliteration (word_id, value, lang) values
 ((select id from verb where hebrew = 'לדעת'), 'ладаат', 'ru'),
 ((select id from verb where hebrew = 'לשתות'), 'лиштот', 'ru'),
 ((select id from verb where hebrew = 'לעבוד'), 'лаавод', 'ru'),
-((select id from verb where hebrew = 'לעבד'), 'леабед', 'ru');
-
-insert into transliteration (word_id, value, lang) values
+((select id from verb where hebrew = 'לעבד'), 'леабед', 'ru'),
 ((select id from verb where hebrew = 'לכתוב'), 'likhtov', 'en'),
-((select id from verb where hebrew = 'לאכול'), 'le\'ekhol', 'en'),
+((select id from verb where hebrew = 'לאכול'), 'le''ekhol', 'en'),
 ((select id from verb where hebrew = 'לומר'), 'lomar', 'en'),
 ((select id from verb where hebrew = 'ללכת'), 'lalekhet', 'en'),
-((select id from verb where hebrew = 'לעשות'), 'la\'asot', 'en'),
-((select id from verb where hebrew = 'לראות'), 'lir\'ot', 'en'),
+((select id from verb where hebrew = 'לעשות'), 'la''asot', 'en'),
+((select id from verb where hebrew = 'לראות'), 'lir''ot', 'en'),
 ((select id from verb where hebrew = 'לשבת'), 'lashevet', 'en'),
 ((select id from verb where hebrew = 'לשמוע'), 'lishmoa', 'en'),
 ((select id from verb where hebrew = 'לקחת'), 'lakakhat', 'en'),
 ((select id from verb where hebrew = 'לדעת'), 'ladaat', 'en'),
 ((select id from verb where hebrew = 'לשתות'), 'lishtot', 'en'),
-((select id from verb where hebrew = 'לעבוד'), 'la\'avod', 'en'),
-((select id from verb where hebrew = 'לעבד'), 'le\'abed', 'en');
+((select id from verb where hebrew = 'לעבוד'), 'la''avod', 'en'),
+((select id from verb where hebrew = 'לעבד'), 'le''abed', 'en');
 '''
 ];
