@@ -47,12 +47,10 @@ _createDbCallback(Database db) {
   db.execute(createVerbSampleSentenceTable);
   db.execute(createVerbSampleTranslationsTable);
 
-  var batch = db.batch();
   for (var query in populateDataQueries) {
-    batch.rawInsert(query);
+    db.execute(query);
   }
 
-  batch.commit();
 }
 
 _migrateDbCallback(Database db, int oldVersion, int newVersion) {}
