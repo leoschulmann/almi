@@ -3,19 +3,10 @@ const List<String> dropQueries = [
   'drop table if exists sample;',
   'drop table if exists sample_meaning;',
   'drop table if exists stem;',
-  'drop table if exists transliteration;',
+  'drop table if exists stem_translation;',
   'drop table if exists verb;',
-  'drop table if exists word_meaning;',
-  // 'drop table if exists meaning_en;',
-  // 'drop table if exists meaning_ru;',
-  // 'drop table if exists stem;',
-  // 'drop table if exists transliteration_en;',
-  // 'drop table if exists transliteration_ru;',
-  // 'drop table if exists word_meaning;',
-  // 'drop table if exists verb;',
-  // 'drop table if exists sample;',
-  // 'drop table if exists sample_meaning;',
-  // 'drop table if exists transliteration;',
+  'drop table if exists verb_translation;',
+  'drop table if exists verb_transliteration;',
 ];
 
 const String createStemTable = '''
@@ -25,21 +16,23 @@ const String createStemTable = '''
     nikkud TEXT not null);
     ''';
 
-const String createTransliterationTable = '''
-    create table transliteration(
+const String createStemTranslationTable = '''
+    create table stem_translation(
+    id      integer not null constraint meaning_ru_pk primary key autoincrement,
+    stem_id integer not null constraint stem_translation_stem_id_fk references stem,
+    value   text    not null,
+    lang    TEXT    not null);
+    ''';
+
+
+const String createStemTranslitTable = '''
+    create table stem_transliteration(
     id      integer not null constraint transliteration_en_pk primary key autoincrement,
-    word_id integer not null,
+    stem_id integer not null constraint stem_translit_stem_id_fk references stem,
     value   TEXT    not null,
     lang    TEXT    not null);
     ''';
 
-const String createMeaningTable = '''
-    create table word_meaning(
-    id      integer not null constraint meaning_ru_pk primary key autoincrement,
-    word_id integer not null,
-    value   text    not null,
-    lang    TEXT    not null);
-    ''';
 
 const String createVerbTable = '''
 create table verb(
@@ -53,18 +46,34 @@ create table verb(
     plurality TEXT    not null);
     ''';
 
-const String createSampleSentenceTable = '''
-create table sample(
+const String createVerbTranslationTable = '''
+create table verb_translation(
+    id      integer not null constraint verb_translation_pk primary key autoincrement,
+    verb_id integer not null constraint verb_translation_verb_id_fk references verb,
+    value   TEXT    not null,
+    lang    TEXT    not null);
+''';
+
+const String createVerbTranslitTable = '''
+    create table verb_transliteration(
+    id      integer not null constraint transliteration_en_pk primary key autoincrement,
+    verb_id integer not null constraint verb_translation_verb_id_fk references verb,
+    value   TEXT    not null,
+    lang    TEXT    not null);
+    ''';
+
+const String createVerbSampleSentenceTable = '''
+create table verb_sample(
     id      integer not null constraint sample_pk primary key autoincrement,
-    word_id integer not null,
-    val     TEXT    not null,
+    verb_id integer not null constraint verb_sample_verb_id_fk references verb,
+    value   TEXT    not null,
     liked   INTEGER default 0);
 ''';
 
-const String createSampleTranslationsTable = '''
-create table sample_meaning(
+const String createVerbSampleTranslationsTable = '''
+create table verb_sample_translation(
     id        integer not null constraint sample_meaning_pk primary key autoincrement ,
-    sample_id integer not null constraint sample_meaning_sample_id_fk references sample,
+    sample_id integer not null constraint sample_meaning_sample_id_fk references verb_sample,
     value     TEXT    not null,
     lang      TEXT    not null);
 ''';
@@ -86,7 +95,7 @@ const List<String> populateDataQueries = [
   ('עבד','עבד');
   ''',
   '''
-insert into word_meaning (word_id, value, lang) values 
+insert into stem_translation (stem_id, value, lang) values 
 ((select id from stem where hebrew = 'כתב'), 'work', 'en'),
 ((select id from stem where hebrew = 'כתב'), 'писать', 'ru'),
 
@@ -143,7 +152,7 @@ insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) valu
 ((select id from stem where hebrew = 'עבד'), 'לעבד', 'לְעַבֵּד', 'piel', 'none', 'none', 'infinitive');
 ''',
   '''
-insert into word_meaning (word_id, value, lang) values
+insert into verb_translation (verb_id, value, lang) values
 ((select id from verb where hebrew = 'לכתוב'), 'писать', 'ru'),
 ((select id from verb where hebrew = 'לאכול'), 'есть', 'ru'),
 ((select id from verb where hebrew = 'לומר'), 'сказать', 'ru'),
@@ -159,7 +168,7 @@ insert into word_meaning (word_id, value, lang) values
 ((select id from verb where hebrew = 'לעבד'), 'обрабатывать', 'ru');
 ''',
 '''
-insert into word_meaning (word_id, value, lang) values
+insert into verb_translation (verb_id, value, lang) values
 ((select id from verb where hebrew = 'לכתוב'), 'to write', 'en'),
 ((select id from verb where hebrew = 'לאכול'), 'to eat', 'en'),
 ((select id from verb where hebrew = 'לומר'), 'to say', 'en'),
@@ -178,7 +187,7 @@ insert into word_meaning (word_id, value, lang) values
 ((select id from verb where hebrew = 'לעבד'), 'to work on', 'en');
 ''',
 '''
-insert into transliteration (word_id, value, lang) values
+insert into verb_transliteration (verb_id, value, lang) values
 ((select id from verb where hebrew = 'לכתוב'), 'лихтов', 'ru'),
 ((select id from verb where hebrew = 'לאכול'), 'леэхоль', 'ru'),
 ((select id from verb where hebrew = 'לומר'), 'ломар', 'ru'),

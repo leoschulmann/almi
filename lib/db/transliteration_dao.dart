@@ -9,13 +9,13 @@ class TransliterationDAO {
     String whereIn = ids.join(', ');
 
     List<Map<String, Object?>> resultSet = await sqlite.query(
-      'transliteration',
-      columns: ['word_id', 'value', 'lang'],
-      where: 'word_id IN ($whereIn)',
+      'verb_transliteration',
+      columns: ['verb_id', 'value', 'lang'],
+      where: 'verb_id IN ($whereIn)',
     );
 
     return Map<int, Map<ForeignLang, String>>.fromEntries(
-        groupBy(resultSet, (tuple) => tuple['word_id']).entries.map((group) {
+        groupBy(resultSet, (tuple) => tuple['verb_id']).entries.map((group) {
       Map<ForeignLang, String> transliterations = Map<ForeignLang, String>.fromEntries(
         group.value.map(
           (row) => MapEntry(parseForeignLang(row['lang'] as String), row['value'] as String),

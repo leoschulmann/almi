@@ -39,11 +39,13 @@ _createDbCallback(Database db) {
   }
 
   db.execute(createStemTable);
-  db.execute(createTransliterationTable);
-  db.execute(createMeaningTable);
+  db.execute(createStemTranslationTable);
+  db.execute(createStemTranslitTable);
   db.execute(createVerbTable);
-  db.execute(createSampleSentenceTable);
-  db.execute(createSampleTranslationsTable);
+  db.execute(createVerbTranslationTable);
+  db.execute(createVerbTranslitTable);
+  db.execute(createVerbSampleSentenceTable);
+  db.execute(createVerbSampleTranslationsTable);
 
   var batch = db.batch();
   for (var query in populateDataQueries) {

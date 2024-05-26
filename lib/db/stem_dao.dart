@@ -44,12 +44,12 @@ class StemDAO {
   static Future<Map<int, Map<ForeignLang, List<String>>>> _getMeaningsForWordIdIn(List<int> ids) async {
     Map<int, Map<ForeignLang, List<String>>> meanings = await sqlite
         .query(
-      'word_meaning',
-      columns: ['word_id', 'value', 'lang'],
-      where: 'word_id IN (${ids.join(', ')})',
+      'stem_translation',
+      columns: ['stem_id', 'value', 'lang'],
+      where: 'stem_id IN (${ids.join(', ')})',
     )
         .then((List<Map<String, Object?>> rows) {
-      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['word_id']);
+      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['stem_id']);
 
       return Map<int, Map<ForeignLang, List<String>>>.fromEntries(
         grouped.entries.map(
@@ -80,12 +80,12 @@ class StemDAO {
   static Future<Map<int, Map<ForeignLang, String>>> _getTransliterationsForWordIdIn(List<int> ids) async {
     Map<int, Map<ForeignLang, String>> transliterations = await sqlite
         .query(
-      'transliteration',
-      columns: ['word_id', 'value', 'lang'],
-      where: 'word_id IN (${ids.join(', ')})',
+      'stem_transliteration',
+      columns: ['stem_id', 'value', 'lang'],
+      where: 'stem_id IN (${ids.join(', ')})',
     )
         .then((List<Map<String, Object?>> rows) {
-      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['word_id']);
+      Map<Object?, List<Map<String, Object?>>> grouped = groupBy(rows, (row) => row['stem_id']);
 
       return Map<int, Map<ForeignLang, String>>.fromEntries(
         grouped.entries.map(

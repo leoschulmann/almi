@@ -7,16 +7,16 @@ class SamplesDAO {
     String whereIn = ids.join(', ');
 
     List<Map<String, Object?>> samplesResultSet = await sqlite.query(
-      'sample',
-      columns: ['word_id', 'val'],
-      where: 'word_id IN ($whereIn)',
+      'verb_sample',
+      columns: ['verb_id', 'value'],
+      where: 'verb_id IN ($whereIn)',
     );
 
     return Map<int, List<String>>.fromEntries(
-      groupBy(samplesResultSet, (tuple) => tuple['word_id']).entries.map(
+      groupBy(samplesResultSet, (tuple) => tuple['verb_id']).entries.map(
         (group) {
           int verbId = group.key as int;
-          List<String> list = group.value.map((e) => e['val'] as String).toList();
+          List<String> list = group.value.map((e) => e['value'] as String).toList();
           return MapEntry(verbId, list);
         },
       ),
