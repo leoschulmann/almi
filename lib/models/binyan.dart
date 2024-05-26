@@ -128,6 +128,13 @@ class Binyan {
     return binyan;
   }
 
+  static BinyanType getByBinyan(Binyan binyan) {
+    return binyans.entries
+        .where((e) => e.value == binyan)
+        .firstOrNull
+        ?.key ?? BinyanType.paal;
+  }
+
   const Binyan._({
     required this.names,
     required this.transliterations,

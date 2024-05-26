@@ -208,10 +208,10 @@ insert into verb_transliteration (verb_id, value, lang) values
   '''
 insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) values 
 ((select id from stem where hebrew = 'כתב'), 'לכתוב', 'לִכְתוֹב', 'paal', 'none', 'none', 'infinitive'),
-((select id from stem where hebrew = 'כתב'), 'כותב', 'כּוֹתֵב', 'paal', 'third', 'singularMasc', 'present'),
-((select id from stem where hebrew = 'כתב'), 'כותבת', 'כּוֹתֶבֶת', 'paal', 'third', 'singularFem', 'present'),
-((select id from stem where hebrew = 'כתב'), 'כותבים', 'כּוֹתְבִים', 'paal', 'third', 'pluralMasc', 'present'),
-((select id from stem where hebrew = 'כתב'), 'כותבות', 'כּוֹתְבוֹת', 'paal', 'third', 'pluralFem', 'present'),
+((select id from stem where hebrew = 'כתב'), 'כותב', 'כּוֹתֵב', 'paal', 'none', 'singularMasc', 'present'),
+((select id from stem where hebrew = 'כתב'), 'כותבת', 'כּוֹתֶבֶת', 'paal', 'none', 'singularFem', 'present'),
+((select id from stem where hebrew = 'כתב'), 'כותבים', 'כּוֹתְבִים', 'paal', 'none', 'pluralMasc', 'present'),
+((select id from stem where hebrew = 'כתב'), 'כותבות', 'כּוֹתְבוֹת', 'paal', 'none', 'pluralFem', 'present'),
 ((select id from stem where hebrew = 'כתב'), 'כתבתי', 'כָּתַבְתִּי', 'paal', 'first', 'singular', 'past'),
 ((select id from stem where hebrew = 'כתב'), 'כתבת', 'כָּתַבְתָּ', 'paal', 'second', 'singularMasc', 'past'),
 ((select id from stem where hebrew = 'כתב'), 'כתבת', 'כָּתַבְתְּ', 'paal', 'second', 'singularFem', 'past'),
@@ -360,10 +360,10 @@ insert into verb_transliteration (verb_id, value, lang) values
   '''
 insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) values 
 ((select id from stem where hebrew = 'אכל'), 'לאכול', 'לֶאֱכֹל', 'paal', 'none', 'none', 'infinitive'),
-((select id from stem where hebrew = 'אכל'), 'אוכל', 'אוֹכֵל', 'paal', 'third', 'singularMasc', 'present'),
-((select id from stem where hebrew = 'אכל'), 'אוכלת', 'אוֹכֶלֶת', 'paal', 'third', 'singularFem', 'present'),
-((select id from stem where hebrew = 'אכל'), 'אוכלים', 'אוֹכְלִים', 'paal', 'third', 'pluralMasc', 'present'),
-((select id from stem where hebrew = 'אכל'), 'אוכלות', 'אוֹכְלוֹת', 'paal', 'third', 'pluralFem', 'present'),
+((select id from stem where hebrew = 'אכל'), 'אוכל', 'אוֹכֵל', 'paal', 'none', 'singularMasc', 'present'),
+((select id from stem where hebrew = 'אכל'), 'אוכלת', 'אוֹכֶלֶת', 'paal', 'none', 'singularFem', 'present'),
+((select id from stem where hebrew = 'אכל'), 'אוכלים', 'אוֹכְלִים', 'paal', 'none', 'pluralMasc', 'present'),
+((select id from stem where hebrew = 'אכל'), 'אוכלות', 'אוֹכְלוֹת', 'paal', 'none', 'pluralFem', 'present'),
 ((select id from stem where hebrew = 'אכל'), 'אכלתי', 'אָכַלְתִּי', 'paal', 'first', 'singular', 'past'),
 ((select id from stem where hebrew = 'אכל'), 'אכלת', 'אָכַלְתָּ', 'paal', 'second', 'singularMasc', 'past'),
 ((select id from stem where hebrew = 'אכל'), 'אכלת', 'אָכַלְתְּ', 'paal', 'second', 'singularFem', 'past'),

@@ -34,7 +34,7 @@ class VerbDAO {
     Map<int, Map<ForeignLang, List<String>>> verbIdToTranslations =
         await TranslationsDAO.getTranslationsForWordIds(verbIds);
 
-     List<Verb> list = resultSet
+    List<Verb> list = resultSet
         .map((tuple) => _mapTupleToVerb(
             tuple,
             verbInfo,
@@ -44,7 +44,47 @@ class VerbDAO {
             verbIdToTranslations[tuple['id']] ?? TranslationsDAO.defaultTranslations))
         .toList();
 
-     return list;
+    return list;
+  }
+
+  static Future<List<Verb>> getAllVerbForms(Stem stem, Binyan binyan) async {
+    List<Map<String, Object?>> resultSet = await sqlite.query('verb', columns: [
+      'id',
+      'hebrew',
+      'nikkud',
+      'binyan',
+      'form',
+      'person',
+      'plurality',
+    ], where: '''
+    stem_id = ${stem.id} AND binyan = '${Binyan.getByBinyan(binyan).name}'
+    ''');
+
+    List<int> verbIds = resultSet.map((tuple) => tuple['id'] as int).toList();
+
+    Map<int, List<String>> verbIdToSamplesMap = await SamplesDAO.getSamplesForWordIds(verbIds);
+
+    Map<int, Map<ForeignLang, String>> verbIdTotransliterations =
+        await TransliterationDAO.getTransliterationsForWordIds(verbIds);
+
+    Map<int, Map<ForeignLang, List<String>>> verbIdToTranslations =
+        await TranslationsDAO.getTranslationsForWordIds(verbIds);
+
+    List<Verb> list = resultSet
+        .map((tuple) => _mapTupleToVerb(
+            tuple,
+            VerbInfo(
+              GrammaticalPerson.get(tuple['person'] as String),
+              Plurality.get(tuple['plurality'] as String),
+              VerbForm.get(tuple['form'] as String),
+            ),
+            stem,
+            verbIdToSamplesMap[tuple['id']!] ?? [],
+            verbIdTotransliterations[tuple['id']!] ?? TransliterationDAO.defaultTransliterations,
+            verbIdToTranslations[tuple['id']] ?? TranslationsDAO.defaultTranslations))
+        .toList();
+
+    return list;
   }
 
   static Verb _mapTupleToVerb(Map<String, Object?> tuple, VerbInfo verbInfo, Stem stem, List<String> samples,
