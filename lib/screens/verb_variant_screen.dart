@@ -10,6 +10,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../data/flutter_icon.dart';
+
+//todo refactor
 class VerbVariantScreen extends ConsumerWidget {
   VerbVariantScreen({required this.verbs, required this.stem, super.key})
       : infinitive = _getVerb(VerbForm.infinitive, GrammaticalPerson.none, Plurality.none, verbs),
@@ -97,6 +100,8 @@ class VerbVariantScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     TextTheme theme = Theme.of(context).textTheme;
 
+    Brightness brTheme = Theme.of(context).brightness;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("all verbs"),
@@ -109,10 +114,12 @@ class VerbVariantScreen extends ConsumerWidget {
               initiallyExpanded: true,
               children: [
                 VerbCard(
-                    icon: const Icon(Icons.ac_unit, color: Colors.red),
-                    hebrew: infinitive.valueHebrew[HebrewLang.simple]!,
-                    nikkud: infinitive.valueHebrew[HebrewLang.nikkud]!,
-                    transliteration: infinitive.transliteration[ForeignLang.en]!)
+                  // icon: const Icon(FlutterIconAlmi.inf_o, color: Colors.red),
+                  icon: FlutterIconAlmi.icon(plurality: Plurality.none, person: GrammaticalPerson.none, theme: brTheme),
+                  hebrew: infinitive.valueHebrew[HebrewLang.simple]!,
+                  nikkud: infinitive.valueHebrew[HebrewLang.nikkud]!,
+                  transliteration: infinitive.transliteration[ForeignLang.en]!,
+                )
               ],
             ),
             ExpansionTile(
@@ -123,17 +130,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.blue),
-                            hebrew: presentMasc.valueHebrew[HebrewLang.simple]!,
-                            nikkud: presentMasc.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: presentMasc.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularMasc, person: GrammaticalPerson.none, theme: brTheme),
+                          hebrew: presentMasc.valueHebrew[HebrewLang.simple]!,
+                          nikkud: presentMasc.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: presentMasc.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.pink),
-                            hebrew: presentFem.valueHebrew[HebrewLang.simple]!,
-                            nikkud: presentFem.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: presentFem.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularFem, person: GrammaticalPerson.none, theme: brTheme),
+                          hebrew: presentFem.valueHebrew[HebrewLang.simple]!,
+                          nikkud: presentFem.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: presentFem.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -141,17 +154,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: presentMascPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: presentMascPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: presentMascPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_pl_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralMasc, person: GrammaticalPerson.none, theme: brTheme),
+                          hebrew: presentMascPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: presentMascPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: presentMascPl.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: presentFemPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: presentFemPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: presentFemPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_pl_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralFem, person: GrammaticalPerson.none, theme: brTheme),
+                          hebrew: presentFemPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: presentFemPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: presentFemPl.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   )
@@ -164,17 +183,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.blue),
-                            hebrew: pastFirst.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastFirst.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastFirst.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.first_sing_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singular, person: GrammaticalPerson.first, theme: brTheme),
+                          hebrew: pastFirst.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastFirst.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastFirst.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.pink),
-                            hebrew: pastFirstPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastFirstPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastFirstPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.first_pl_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.plural, person: GrammaticalPerson.first, theme: brTheme),
+                          hebrew: pastFirstPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastFirstPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastFirstPl.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -182,17 +207,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: pastSecondMasc.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastSecondMasc.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastSecondMasc.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_sing_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularMasc, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: pastSecondMasc.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastSecondMasc.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastSecondMasc.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: pastSecondFem.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastSecondFem.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastSecondFem.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_sing_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularFem, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: pastSecondFem.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastSecondFem.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastSecondFem.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -200,17 +231,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: pastSecondMascPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastSecondMascPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastSecondMascPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_pl_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralMasc, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: pastSecondMascPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastSecondMascPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastSecondMascPl.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: pastSecondFemPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastSecondFemPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastSecondFemPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_pl_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralFem, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: pastSecondFemPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastSecondFemPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastSecondFemPl.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -218,17 +255,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: pastThirdMasc.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastThirdMasc.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastThirdMasc.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularMasc, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: pastThirdMasc.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastThirdMasc.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastThirdMasc.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: pastThirdFem.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastThirdFem.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastThirdFem.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularFem, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: pastThirdFem.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastThirdFem.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastThirdFem.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -236,10 +279,13 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: pastThirdPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: pastThirdPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: pastThirdPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_pl_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.plural, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: pastThirdPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: pastThirdPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: pastThirdPl.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                     ],
                   )
@@ -252,17 +298,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.blue),
-                            hebrew: futureFirst.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureFirst.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureFirst.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.first_sing_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singular, person: GrammaticalPerson.first, theme: brTheme),
+                          hebrew: futureFirst.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureFirst.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureFirst.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.person, color: Colors.pink),
-                            hebrew: futureFirstPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureFirstPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureFirstPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.first_pl_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.plural, person: GrammaticalPerson.first, theme: brTheme),
+                          hebrew: futureFirstPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureFirstPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureFirstPl.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -270,17 +322,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: futureSecondMasc.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureSecondMasc.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureSecondMasc.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_sing_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularMasc, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: futureSecondMasc.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureSecondMasc.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureSecondMasc.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: futureSecondFem.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureSecondFem.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureSecondFem.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_sing_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularFem, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: futureSecondFem.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureSecondFem.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureSecondFem.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -288,17 +346,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: futureSecondMascPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureSecondMascPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureSecondMascPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_pl_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralMasc, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: futureSecondMascPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureSecondMascPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureSecondMascPl.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: futureSecondFemPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureSecondFemPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureSecondFemPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.sec_pl_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.pluralFem, person: GrammaticalPerson.second, theme: brTheme),
+                          hebrew: futureSecondFemPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureSecondFemPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureSecondFemPl.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -306,17 +370,23 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: futureThirdMasc.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureThirdMasc.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureThirdMasc.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_masc_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularMasc, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: futureThirdMasc.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureThirdMasc.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureThirdMasc.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                            hebrew: futureThirdFem.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureThirdFem.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureThirdFem.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_sing_fem_o, color: Colors.pink),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.singularFem, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: futureThirdFem.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureThirdFem.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureThirdFem.transliteration[ForeignLang.en]!,
+                        ),
                       )
                     ],
                   ),
@@ -324,10 +394,13 @@ class VerbVariantScreen extends ConsumerWidget {
                     children: [
                       Expanded(
                         child: VerbCard(
-                            icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                            hebrew: futureThirdPl.valueHebrew[HebrewLang.simple]!,
-                            nikkud: futureThirdPl.valueHebrew[HebrewLang.nikkud]!,
-                            transliteration: futureThirdPl.transliteration[ForeignLang.en]!),
+                          // icon: const Icon(FlutterIconAlmi.third_pl_o, color: Colors.blue),
+                          icon: FlutterIconAlmi.icon(
+                              plurality: Plurality.plural, person: GrammaticalPerson.third, theme: brTheme),
+                          hebrew: futureThirdPl.valueHebrew[HebrewLang.simple]!,
+                          nikkud: futureThirdPl.valueHebrew[HebrewLang.nikkud]!,
+                          transliteration: futureThirdPl.transliteration[ForeignLang.en]!,
+                        ),
                       ),
                     ],
                   )
@@ -340,17 +413,23 @@ class VerbVariantScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: VerbCard(
-                          icon: const Icon(Icons.person, color: Colors.blue),
-                          hebrew: imperativeMasc.valueHebrew[HebrewLang.simple]!,
-                          nikkud: imperativeMasc.valueHebrew[HebrewLang.nikkud]!,
-                          transliteration: imperativeMasc.transliteration[ForeignLang.en]!),
+                        // icon: const Icon(FlutterIconAlmi.sec_sing_masc_o, color: Colors.blue),
+                        icon: FlutterIconAlmi.icon(
+                            plurality: Plurality.singularMasc, person: GrammaticalPerson.none, theme: brTheme),
+                        hebrew: imperativeMasc.valueHebrew[HebrewLang.simple]!,
+                        nikkud: imperativeMasc.valueHebrew[HebrewLang.nikkud]!,
+                        transliteration: imperativeMasc.transliteration[ForeignLang.en]!,
+                      ),
                     ),
                     Expanded(
                       child: VerbCard(
-                          icon: const Icon(Icons.person, color: Colors.pink),
-                          hebrew: imperativeFem.valueHebrew[HebrewLang.simple]!,
-                          nikkud: imperativeFem.valueHebrew[HebrewLang.nikkud]!,
-                          transliteration: imperativeFem.transliteration[ForeignLang.en]!),
+                        // icon: const Icon(FlutterIconAlmi.sec_sing_fem_o, color: Colors.pink),
+                        icon: FlutterIconAlmi.icon(
+                            plurality: Plurality.singularFem, person: GrammaticalPerson.none, theme: brTheme),
+                        hebrew: imperativeFem.valueHebrew[HebrewLang.simple]!,
+                        nikkud: imperativeFem.valueHebrew[HebrewLang.nikkud]!,
+                        transliteration: imperativeFem.transliteration[ForeignLang.en]!,
+                      ),
                     )
                   ],
                 ),
@@ -358,17 +437,23 @@ class VerbVariantScreen extends ConsumerWidget {
                   children: [
                     Expanded(
                       child: VerbCard(
-                          icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.blue),
-                          hebrew: imperativeMascPl.valueHebrew[HebrewLang.simple]!,
-                          nikkud: imperativeMascPl.valueHebrew[HebrewLang.nikkud]!,
-                          transliteration: imperativeMascPl.transliteration[ForeignLang.en]!),
+                        // icon: const Icon(FlutterIconAlmi.sec_pl_masc_o, color: Colors.blue),
+                        icon: FlutterIconAlmi.icon(
+                            plurality: Plurality.pluralMasc, person: GrammaticalPerson.none, theme: brTheme),
+                        hebrew: imperativeMascPl.valueHebrew[HebrewLang.simple]!,
+                        nikkud: imperativeMascPl.valueHebrew[HebrewLang.nikkud]!,
+                        transliteration: imperativeMascPl.transliteration[ForeignLang.en]!,
+                      ),
                     ),
                     Expanded(
                       child: VerbCard(
-                          icon: const Icon(Icons.supervised_user_circle_sharp, color: Colors.pink),
-                          hebrew: imperativeFemPl.valueHebrew[HebrewLang.simple]!,
-                          nikkud: imperativeFemPl.valueHebrew[HebrewLang.nikkud]!,
-                          transliteration: imperativeFemPl.transliteration[ForeignLang.en]!),
+                        // icon: const Icon(FlutterIconAlmi.sec_pl_fem_o, color: Colors.pink),
+                        icon: FlutterIconAlmi.icon(
+                            plurality: Plurality.pluralFem, person: GrammaticalPerson.none, theme: brTheme),
+                        hebrew: imperativeFemPl.valueHebrew[HebrewLang.simple]!,
+                        nikkud: imperativeFemPl.valueHebrew[HebrewLang.nikkud]!,
+                        transliteration: imperativeFemPl.transliteration[ForeignLang.en]!,
+                      ),
                     )
                   ],
                 )
@@ -384,7 +469,7 @@ class VerbVariantScreen extends ConsumerWidget {
     Verb? firstOrNull =
         verbs.where((e) => e.info.form == form && e.info.plurality == plurality && e.info.person == person).firstOrNull;
 
-    if(firstOrNull == null) {
+    if (firstOrNull == null) {
       print('not found $form $person $plurality');
     }
     return firstOrNull ??= emptyPlaceholder;

@@ -231,10 +231,10 @@ insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) valu
 ((select id from stem where hebrew = 'כתב'), 'תכתבנה', 'תִּכְתֹּבְנָה', 'paal', 'second', 'pluralFem', 'future'),
 ((select id from stem where hebrew = 'כתב'), 'יכתבו', 'יִכְתְּבוּ', 'paal', 'third', 'pluralMasc', 'future'),
 ((select id from stem where hebrew = 'כתב'), 'תכתבנה', 'תִּכְתֹּבְנָה', 'paal', 'third', 'pluralFem', 'future'),
-((select id from stem where hebrew = 'כתב'), 'כתוב', 'כְּתוֹב', 'paal', 'second', 'singularMasc', 'imperative'),
-((select id from stem where hebrew = 'כתב'), 'כתבי', 'כִּתְבִי', 'paal', 'second', 'singularFem', 'imperative'),
-((select id from stem where hebrew = 'כתב'), 'כתבו', 'כִּתְבוּ', 'paal', 'second', 'pluralMasc', 'imperative'),
-((select id from stem where hebrew = 'כתב'), 'כתבנה', 'כְּתֹבְנָה', 'paal', 'second', 'pluralFem', 'imperative');
+((select id from stem where hebrew = 'כתב'), 'כתוב', 'כְּתוֹב', 'paal', 'none', 'singularMasc', 'imperative'),
+((select id from stem where hebrew = 'כתב'), 'כתבי', 'כִּתְבִי', 'paal', 'none', 'singularFem', 'imperative'),
+((select id from stem where hebrew = 'כתב'), 'כתבו', 'כִּתְבוּ', 'paal', 'none', 'pluralMasc', 'imperative'),
+((select id from stem where hebrew = 'כתב'), 'כתבנה', 'כְּתֹבְנָה', 'paal', 'none', 'pluralFem', 'imperative');
 ''',
 
   // all translations for 'to write' forms
@@ -383,10 +383,10 @@ insert into verb (stem_id, hebrew, nikkud, binyan, person, plurality, form) valu
 ((select id from stem where hebrew = 'אכל'), 'תאכלנה', 'תֹּאכַלְנָה', 'paal', 'second', 'pluralFem', 'future'),
 ((select id from stem where hebrew = 'אכל'), 'יאכלו', 'יֹאכְלוּ', 'paal', 'third', 'pluralMasc', 'future'),
 ((select id from stem where hebrew = 'אכל'), 'תאכלנה', 'תֹּאכַלְנָה', 'paal', 'third', 'pluralFem', 'future'),
-((select id from stem where hebrew = 'אכל'), 'אכול', 'אֱכֹל', 'paal', 'second', 'singularMasc', 'imperative'),
-((select id from stem where hebrew = 'אכל'), 'אכלי', 'אִכְלִי', 'paal', 'second', 'singularFem', 'imperative'),
-((select id from stem where hebrew = 'אכל'), 'אכלו', 'אִכְלוּ', 'paal', 'second', 'pluralMasc', 'imperative'),
-((select id from stem where hebrew = 'אכל'), 'אכלנה', 'אֱכֹלְנָה', 'paal', 'second', 'pluralFem', 'imperative');
+((select id from stem where hebrew = 'אכל'), 'אכול', 'אֱכֹל', 'paal', 'none', 'singularMasc', 'imperative'),
+((select id from stem where hebrew = 'אכל'), 'אכלי', 'אִכְלִי', 'paal', 'none', 'singularFem', 'imperative'),
+((select id from stem where hebrew = 'אכל'), 'אכלו', 'אִכְלוּ', 'paal', 'none', 'pluralMasc', 'imperative'),
+((select id from stem where hebrew = 'אכל'), 'אכלנה', 'אֱכֹלְנָה', 'paal', 'none', 'pluralFem', 'imperative');
   ''',
   '''
 insert into verb_translation (verb_id, value, lang) values

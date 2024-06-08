@@ -101,3 +101,6 @@ flutter:
     - family: Gveret
       fonts:
         - asset: fonts/GveretLevinAlefAlefAlef-Regular.otf
+    - family:  Almi
+      fonts:
+       - asset: fonts/Almi.ttf
