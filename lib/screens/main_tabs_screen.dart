@@ -4,16 +4,16 @@ import 'package:ani_lo_medaber_ivrit/screens/stems_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class TabsScreen extends ConsumerStatefulWidget {
-  const TabsScreen({super.key});
+class MainTabsScreen extends ConsumerStatefulWidget {
+  const MainTabsScreen({super.key});
 
   @override
-  ConsumerState<TabsScreen> createState() {
-    return _TabsScreenState();
+  ConsumerState<MainTabsScreen> createState() {
+    return _MainTabsScreenState();
   }
 }
 
-class _TabsScreenState extends ConsumerState<TabsScreen> {
+class _MainTabsScreenState extends ConsumerState<MainTabsScreen> {
   void _setScreenOnIndex(int idx) {
     switch (idx) {
       case 0:

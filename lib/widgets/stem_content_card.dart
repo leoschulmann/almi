@@ -3,14 +3,14 @@ import 'package:ani_lo_medaber_ivrit/enums/foreign_lang.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/verb.dart';
 import 'package:ani_lo_medaber_ivrit/providers/tab_screen_provider.dart';
-import 'package:ani_lo_medaber_ivrit/screens/verb_variant_screen.dart';
+import 'package:ani_lo_medaber_ivrit/screens/verb_content_screen.dart';
 import 'package:ani_lo_medaber_ivrit/styles/style_helper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StemDetailsContainer extends ConsumerWidget {
-  const StemDetailsContainer({super.key, required this.verb});
+class StemContentCard extends ConsumerWidget {
+  const StemContentCard({super.key, required this.verb});
 
   final Verb verb;
 
@@ -21,7 +21,7 @@ class StemDetailsContainer extends ConsumerWidget {
     return InkWell(
       onTap: () async {
         VerbDAO.getAllVerbForms(verb.stem, verb.binyan).then(
-          (verbs) => ref.read(currentScreenProvider.notifier).state = VerbVariantScreen(stem: verb.stem, verbs: verbs),
+          (verbs) => ref.read(currentScreenProvider.notifier).state = VerbContentScreen(stem: verb.stem, verbs: verbs),
         );
       },
       child: Row(

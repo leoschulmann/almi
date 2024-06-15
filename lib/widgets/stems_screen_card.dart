@@ -4,14 +4,14 @@ import 'package:ani_lo_medaber_ivrit/db/verb_dao.dart';
 import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/providers/tab_screen_provider.dart';
-import 'package:ani_lo_medaber_ivrit/screens/stem_details_screen.dart';
+import 'package:ani_lo_medaber_ivrit/screens/stem_content_screen.dart';
 import 'package:ani_lo_medaber_ivrit/styles/style_helper.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StemContainer extends ConsumerWidget {
-  const StemContainer({super.key, required this.stem});
+class StemsScreenCard extends ConsumerWidget {
+  const StemsScreenCard({super.key, required this.stem});
 
   final Stem stem;
 
@@ -24,7 +24,7 @@ class StemContainer extends ConsumerWidget {
       child: InkWell(
         onTap: () async {
           VerbDAO.getVerbsForStem(stem).then(
-            (verbs) => ref.read(currentScreenProvider.notifier).state = StemDetailsScreen(verbs: verbs, stem: stem),
+            (verbs) => ref.read(currentScreenProvider.notifier).state = StemContentScreen(verbs: verbs, stem: stem),
           );
         },
         child: Card(

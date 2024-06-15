@@ -1,6 +1,6 @@
 import 'package:ani_lo_medaber_ivrit/db/stem_dao.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
-import 'package:ani_lo_medaber_ivrit/widgets/stem_container.dart';
+import 'package:ani_lo_medaber_ivrit/widgets/stems_screen_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,36 +14,36 @@ class StemsScreen extends ConsumerStatefulWidget {
 }
 
 class _StemsScreenState extends ConsumerState<StemsScreen> {
-  List<Stem> currentStems = [];
 
-  Future<void> fetchData() async {
-    List<Stem> stems = await StemDAO.getStems(50, 0);
-    setState(() => currentStems = stems);
-  }
+  late Future<List<Stem>> _availableStems;
 
-  Widget drawBody() {
-    if (currentStems.isEmpty) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(child: ElevatedButton(onPressed: fetchData, child: const Text("Load stems from DB"))),
-        ],
-      );
-    } else {
-      return ListView.builder(
-        itemCount: currentStems.length,
-        itemBuilder: (context, index) {
-          return StemContainer(stem: currentStems[index]);
-        },
-      );
-    }
+  @override
+  void initState() {
+    super.initState();
+    _availableStems = StemDAO.getStems(50, 0);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Stems (${currentStems.length})")),
-      body: drawBody(),
+      appBar: AppBar(title: const Text("Stems)")),
+      body: FutureBuilder<List<Stem>>(
+        future: _availableStems,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No data available'));
+          } else {
+            return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) =>
+                    StemsScreenCard(stem: snapshot.data![index]));
+          }
+        },
+      ),
     );
   }
 }

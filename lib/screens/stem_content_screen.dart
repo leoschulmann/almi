@@ -2,23 +2,23 @@ import 'package:ani_lo_medaber_ivrit/enums/hebrew_lang.dart';
 import 'package:ani_lo_medaber_ivrit/models/stem.dart';
 import 'package:ani_lo_medaber_ivrit/models/verb.dart';
 import 'package:ani_lo_medaber_ivrit/styles/style_helper.dart';
-import 'package:ani_lo_medaber_ivrit/widgets/stem_details_container.dart';
+import 'package:ani_lo_medaber_ivrit/widgets/stem_content_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StemDetailsScreen extends ConsumerStatefulWidget {
-  const StemDetailsScreen({super.key, required this.verbs, required this.stem});
+class StemContentScreen extends ConsumerStatefulWidget {
+  const StemContentScreen({super.key, required this.verbs, required this.stem});
 
   final List<Verb> verbs;
   final Stem stem;
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() {
-    return _StemDetailsScreenState();
+    return _StemContentScreenState();
   }
 }
 
-class _StemDetailsScreenState extends ConsumerState<StemDetailsScreen> {
+class _StemContentScreenState extends ConsumerState<StemContentScreen> {
   @override
   Widget build(BuildContext context) {
     TextTheme theme = Theme.of(context).textTheme;
@@ -32,7 +32,7 @@ class _StemDetailsScreenState extends ConsumerState<StemDetailsScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text('Verbs', style: StyleHelper.getItalicLatin(theme.headlineLarge!)),
-            ...widget.verbs.map((v) => StemDetailsContainer(verb: v)),
+            ...widget.verbs.map((v) => StemContentCard(verb: v)),
             const SizedBox(height: 12),
             const Divider(height: 10),
             Text('Nouns', style: StyleHelper.getItalicLatin(theme.headlineLarge!)),

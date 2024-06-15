@@ -10,8 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/flutter_icon.dart';
 
-class VerbVariantScreen extends ConsumerWidget {
-  VerbVariantScreen({required verbs, required this.stem, super.key}) : cv = CompleteVerb(verbs);
+class VerbContentScreen extends ConsumerWidget {
+  VerbContentScreen({required verbs, required this.stem, super.key}) : cv = CompleteVerb(verbs);
 
   final CompleteVerb cv;
   final Stem stem;
