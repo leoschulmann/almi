@@ -85,7 +85,7 @@ class CompleteVerb {
       ForeignLang.ru: ['n/a']
     }),
     info: VerbInfo(GrammaticalPerson.none, Plurality.none, VerbForm.infinitive),
-    samples: ['n/a'],
+    samples: [],
     valueHebrew: {HebrewLang.simple: 'n/a', HebrewLang.nikkud: 'n/a'},
     transliteration: {ForeignLang.en: 'n/a', ForeignLang.ru: 'n/a'},
     meanings: {

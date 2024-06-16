@@ -511,5 +511,15 @@ insert into verb_transliteration (verb_id, value, lang) values
 ((select id from verb where hebrew = 'אכלי'), 'echli', 'en'),
 ((select id from verb where hebrew = 'אכלו'), 'echlu', 'en'),
 ((select id from verb where hebrew = 'אכלנה'), 'echalna', 'en');
+  ''',
+  '''
+insert into verb_sample (verb_id, value, liked) values
+((select id from verb where hebrew = 'לאכול'), 'foo sample1', false),
+((select id from verb where hebrew = 'לאכול'), 'foo sample2', true);
+  ''',
+  '''
+insert into verb_sample_translation (sample_id, value, lang) values
+((select id from verb_sample where value = 'foo sample1'), 'foo sample translation 1', 'en'),
+((select id from verb_sample where value = 'foo sample2'), 'foo sample translation 2', 'en');
   '''
 ];
